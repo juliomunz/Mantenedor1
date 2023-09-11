@@ -3,10 +3,8 @@ package com.example.crud.controller;
 import com.example.crud.entity.Task;
 import com.example.crud.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,13 +19,25 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Task> findAll(){
         return this.taskService.getTasks();
     }
 
-    @PostMapping
-    public void createTask(Task task){
-        this.taskService.newTask(task);
+    @PostMapping("/create")
+    public ResponseEntity<Object> createTask(@RequestBody Task task){
+        return this.taskService.newTask(task);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<Object> updateTask(@RequestBody Task task) {
+        return this.taskService.newTask(task);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<Object> deleteTask(@PathVariable ("id") Long id){
+        return this.taskService.deleteTask(id);
+    }
+
+
 }
