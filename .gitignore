@@ -20,7 +20,7 @@ target/
 *.ipr
 
 ### Docker ###
-data/
+/data/**
 
 ### NetBeans ###
 /nbproject/private/
